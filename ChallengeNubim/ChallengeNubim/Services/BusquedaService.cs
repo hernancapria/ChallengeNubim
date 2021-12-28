@@ -34,7 +34,7 @@ namespace ChallengeNubim.Services
 
             try
             {
-                var b = Task.Run(async () => await client.GetAsync(endpoint));
+                var b =  client.GetAsync(endpoint);
                 response = b.Result;
             }
             catch
