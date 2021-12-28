@@ -14,7 +14,8 @@ namespace ChallengeNubim2
     class Program
     {
         
-        static async Task Main(string[] args)
+        //static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             try
             {
@@ -27,7 +28,6 @@ namespace ChallengeNubim2
                 // esta lista va a contener la lista anterior y las cotizaciones de cada moneda
                 List<Currency> lstWithConversion = new List<Currency>();
 
-
                 // recorrerlo y por cada moneda consultar su cotizacion con respecto al dolar
                 // asignar el objeto con el resultado de la cotizacion en la propiedad to_dolar
                 foreach (var curr in lstCurr)
@@ -38,14 +38,7 @@ namespace ChallengeNubim2
                     currWithConversion.symbol = curr.symbol;
                     currWithConversion.decimal_places = curr.decimal_places;
 
-                    // se arranca la Task llamando a la funcion asincrona GetDolarConversion
-                    Task<CurrencyConversion> callTask = Task.Run(() => currencies.GetDolarConversion(curr.id));
-
-                    // la instruccion es para q espere a q termine de ejecutar la funcion asyncrona para continuar
-                    // ya que como tarda mas el programa sigue de largo
-                    await callTask;
-
-                    CurrencyConversion currencyConversion = callTask.Result;
+                    CurrencyConversion currencyConversion = currencies.GetDolarConversion(curr.id);
 
                     // se completa el objeto con el dato q falta q es la cotizacion
                     currWithConversion.to_dolar = currencyConversion;
@@ -56,7 +49,7 @@ namespace ChallengeNubim2
                 var jsonLstWithConversion = JsonConvert.SerializeObject(lstWithConversion);
 
                 // guardar en un txt el resultado serializado a un json 
-                File.AppendAllText("ResultadoCotizaciones.txt", jsonLstWithConversion + Environment.NewLine);
+                File.AppendAllText("ResultadoCotizaciones" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".txt", jsonLstWithConversion + Environment.NewLine);
 
                 // guardar los ratios en un csv
                 File.WriteAllLines("ResultadoRatio.csv", lstWithConversion.Select(x => string.Join(",", x.to_dolar.ratio)));
