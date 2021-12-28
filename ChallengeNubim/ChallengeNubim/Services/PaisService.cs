@@ -38,7 +38,7 @@ namespace ChallengeNubim.Services
                 HttpResponseMessage response = new HttpResponseMessage();
                 try
                 {
-                    var p = Task.Run(async () => await client.GetAsync(codigo));
+                    var p = client.GetAsync(codigo);
                     response = p.Result;
 
                 }
