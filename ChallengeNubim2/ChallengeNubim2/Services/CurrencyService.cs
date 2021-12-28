@@ -34,14 +34,14 @@ namespace ChallengeNubim2.Services
 
         }
 
-        public async Task<CurrencyConversion> GetDolarConversion(string id)
+        public CurrencyConversion GetDolarConversion(string id)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 string endpointCurrenciesConversionesReplaced = string.Format(endpointCurrenciesConversiones, id);
                 HttpResponseMessage response = new HttpResponseMessage();
-                response = await client.GetAsync(endpointCurrenciesConversionesReplaced);
+                response = client.GetAsync(endpointCurrenciesConversionesReplaced).Result;
                 CurrencyConversion currency = new CurrencyConversion();
                 if (response.IsSuccessStatusCode)
                 {
