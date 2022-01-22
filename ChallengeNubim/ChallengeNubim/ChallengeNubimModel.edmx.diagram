@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3248f159927a4378a63a1f8cda637301" Name="Diagram1">
         <EntityTypeShape EntityType="ChallengeNubimModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChallengeNubimModel.Pais" Width="1.5" PointX="0.75" PointY="4.125" />
+        <AssociationConnector Association="ChallengeNubimModel.FK_User_Pais" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

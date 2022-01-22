@@ -26,5 +26,6 @@ namespace ChallengeNubim
         }
     
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Pais> Pais { get; set; }
     }
 }

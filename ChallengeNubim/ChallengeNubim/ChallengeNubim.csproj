@@ -180,11 +180,17 @@
     <Compile Include="Contracts\IBusquedaService.cs" />
     <Compile Include="Contracts\IPaisService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BusquedaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Pais1Controller.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataAccess\Base\Repository.cs" />
+    <Compile Include="DataAccess\PaisDataAccess.cs" />
+    <Compile Include="DataAccess\RepositoryDataAccess.cs" />
     <Compile Include="DataAccess\UserDataAccess.cs" />
     <Compile Include="DataAccess\UserDataAccess.old.cs" />
     <Compile Include="Entities\ResultadoBusqueda.cs" />
@@ -192,7 +198,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SecurePasswordHasher.cs" />
+    <Compile Include="Models\PaisModel.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
+    <Compile Include="Pais.cs">
+      <DependentUpon>ChallengeNubimModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Base\BaseService.cs" />
     <Compile Include="Services\BusquedaService.cs" />
     <Compile Include="Services\PaisService.cs" />
     <Compile Include="Services\UserService.cs" />
@@ -248,11 +262,18 @@
       <DependentUpon>ChallengeNubimModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Controller\Pais.js" />
+    <Content Include="Scripts\Controller\Usuario.js" />
+    <Content Include="Scripts\inputmask.js" />
+    <Content Include="Scripts\inputmask.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.inputmask.js" />
+    <Content Include="Scripts\jquery.inputmask.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\notify.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -267,10 +288,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\AddOrEdit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Pais1\Index.cshtml" />
+    <Content Include="Views\Pais1\AddOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

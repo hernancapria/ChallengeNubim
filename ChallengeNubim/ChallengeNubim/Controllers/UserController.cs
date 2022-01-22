@@ -1,4 +1,5 @@
-﻿using ChallengeNubim.DataAccess;
+﻿using ChallengeNubim.Contracts;
+using ChallengeNubim.DataAccess;
 using ChallengeNubim.Services;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using ChallengeNubim.Models;
 
 namespace ChallengeNubim.Controllers
 {
@@ -17,7 +19,7 @@ namespace ChallengeNubim.Controllers
             try
             {
                 UserService userService = new UserService();
-                List<User> users = userService.GetAll();
+                List<UsuarioModel> users = userService.GetAll();
                 return Ok(users);
                 
             }
@@ -35,7 +37,7 @@ namespace ChallengeNubim.Controllers
             try
             {
                 UserService userService = new UserService();
-                User user = userService.Get(id);
+                UsuarioModel user = userService.Get(id);
                 return Ok(user);
 
             }
@@ -47,7 +49,7 @@ namespace ChallengeNubim.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]User value)
+        public HttpResponseMessage Post([FromBody]UsuarioModel value)
         {
             try
             {
@@ -68,7 +70,7 @@ namespace ChallengeNubim.Controllers
 
 
         [HttpPut]
-        public HttpResponseMessage Put([FromBody]User value)
+        public HttpResponseMessage Put([FromBody]UsuarioModel value)
         {
             try
             {

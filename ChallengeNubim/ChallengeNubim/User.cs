@@ -19,5 +19,9 @@ namespace ChallengeNubim
         public string apellido { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public Nullable<int> id_pais { get; set; }
+        public Nullable<System.DateTime> fecha_ingreso { get; set; }
+    
+        public virtual Pais Pais { get; set; }
     }
 }

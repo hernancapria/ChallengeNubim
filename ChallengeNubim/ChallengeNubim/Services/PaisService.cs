@@ -8,68 +8,29 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using ChallengeNubim.Contracts;
+using ChallengeNubim.Models;
+using ChallengeNubim.DataAccess;
+using ChallengeNubim.Services.Base;
 
 namespace ChallengeNubim.Services
 {
 
-    public class PaisService : IPaisService
+    public class PaisService : BaseService<PaisModel, Pais>, IPaisService
     {
-        string endpoint = "https://api.mercadolibre.com/classified_locations/countries/";
-
-        // aca lo ideal es crear una tabla de paises con sus codigos y una columna llamada Autorizado
-        List<string> paisesNoAutorizados = new List<string>() { "BR", "CO" };
-
-        /// <summary>
-        /// Devuelve los datos de un pais
-        /// </summary>
-        /// <param name="codigo">string</param>
-        /// <returns></returns>
-        public Pais Get(string codigo)
+        public override Pais MapFromModel(PaisModel model)
         {
-            Pais pais = new Pais();
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(endpoint);
+            Pais item = new Pais();
+            item.id = model.id;
+            item.descripcion = model.descripcion;
+            return item;
+        }
 
-            if (string.IsNullOrEmpty(codigo))
-                return null;
-
-            if (!paisesNoAutorizados.Where(x => x == codigo.ToUpper()).Any())
-            {
-                HttpResponseMessage response = new HttpResponseMessage();
-                try
-                {
-                    var p = client.GetAsync(codigo);
-                    response = p.Result;
-
-                }
-                catch
-                {
-                    throw new HttpResponseException(HttpStatusCode.InternalServerError);
-                }
-
-                if (response.IsSuccessStatusCode)
-                {
-                    pais = response.Content.ReadAsAsync<Pais>().Result;
-
-                }
-                else
-                {
-                    throw new HttpResponseException(response.StatusCode);
-
-                }
-
-            }
-            else
-            {
-                throw new HttpResponseException(HttpStatusCode.Unauthorized);
-
-            }
-
-            
-
-            return pais;
-
-
+        public override PaisModel MapToModel(Pais item)
+        {
+            PaisModel model = new PaisModel();
+            model.id = item.id;
+            model.descripcion = item.descripcion;
+            return model;
         }
 
     }
