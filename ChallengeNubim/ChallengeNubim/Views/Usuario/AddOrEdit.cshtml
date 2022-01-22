@@ -1,0 +1,66 @@
+﻿@model ChallengeNubim.Models.UsuarioModel
+@{
+    Layout = null;
+}
+
+    <div>
+        @using (Html.BeginForm("AddOrEdit", "Usuario", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", id = "frm" }))
+        {
+            @Html.ValidationSummary(true);
+            @Html.HiddenFor(model => model.id)
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre, new { @class = "control-label" })
+                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" } )
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.apellido, new { @class = "control-label" })
+                @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.email, new { @class = "control-label" })
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, new { @class = "control-label" })
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.id_pais, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.id_pais,
+                       (List<SelectListItem>)ViewBag.Paises,
+                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_pais, "", new { @class = "text-danger" })*@
+
+                @Html.LabelFor(model => model.id_pais, new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.id_pais,
+                    new SelectList(Model.Paises, "id", "descripcion"), "- Seleccione una opcion -",
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_pais, "", new { @class = "text-danger" })
+
+
+
+
+
+
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.fecha_ingreso, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.fecha_ingreso, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.fecha_ingreso, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+                <input type="reset" value="Reset" class="btn btn-primary" />
+            </div>
+        }
+        </div>
+    
+        <script>
+            $("#fecha_ingreso").mask("99/99/9999", {placeholder: "__/__/____" });
+
+
+        </script>

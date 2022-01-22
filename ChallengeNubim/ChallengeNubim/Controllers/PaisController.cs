@@ -21,7 +21,7 @@ namespace ChallengeNubim.Controllers
             PaisService paisService = new PaisService();
             try
             {
-                var p = paisService.Get(codigo);
+                var p = paisService.Get(Convert.ToInt32(codigo));
                 return Ok(p);
 
             }

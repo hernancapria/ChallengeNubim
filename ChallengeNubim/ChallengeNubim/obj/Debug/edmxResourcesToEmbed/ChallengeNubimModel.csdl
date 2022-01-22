@@ -8,9 +8,38 @@
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="id_pais" Type="Int32" />
+    <NavigationProperty Name="Pais" Relationship="ChallengeNubimModel.FK_User_Pais" FromRole="User" ToRole="Pais" />
+    <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityContainer Name="ChallengeNubimEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="Pais" EntityType="ChallengeNubimModel.Pais" />
+    <AssociationSet Name="FK_User_Pais" Association="ChallengeNubimModel.FK_User_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="ChallengeNubimModel.FK_User_Pais" FromRole="Pais" ToRole="User" />
+    <Property Name="activo" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_User_Pais">
+    <End Type="ChallengeNubimModel.Pais" Role="Pais" Multiplicity="0..1" />
+    <End Type="ChallengeNubimModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
